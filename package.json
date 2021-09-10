@@ -1,12 +1,31 @@
 {
+  "name": "nodejs-web-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/franzlagler/random-color-generator.git"
+  },
+  "author": "Franz Lagler",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/franzlagler/random-color-generator/issues"
+  },
+  "homepage": "https://github.com/franzlagler/random-color-generator#readme",
   "devDependencies": {
     "@next/eslint-plugin-next": "^11.0.0",
+    "@types/color-convert": "^2.0.0",
     "@types/node": "^16.0.0",
     "@types/react": "^17.0.6",
     "@types/react-dom": "^17.0.5",
+    "@types/readline-sync": "^1.4.4",
     "@typescript-eslint/eslint-plugin": "^4.21.0",
     "@typescript-eslint/parser": "^4.21.0",
-    "@upleveled/eslint-config-upleveled": "1.15.5-0",
+    "@upleveled/eslint-config-upleveled": "1.15.6",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.23.0",
     "eslint-config-react-app": "^6.0.0",
@@ -25,5 +44,8 @@
   "resolutions": {
     "eslint-plugin-react": "7.24.0",
     "eslint-plugin-testing-library": "4.6.0"
+  },
+  "dependencies": {
+    "@upleveled/eslint-plugin-upleveled": "^1.0.0"
   }
 }
