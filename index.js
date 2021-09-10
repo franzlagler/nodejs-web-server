@@ -5,7 +5,7 @@ const path = require('node:path');
 const getCorrectContentType = require('./ContentType'); // Custom Module
 
 // 1. Configure Server to Run on Port
-function configureServer() {
+function runServer() {
   const server = http.createServer((req, res) => {
     // Prefix ensures that only files within the public folder are acccessible
     let fileName = './public' + req.url;
@@ -61,4 +61,4 @@ function configureServer() {
 }
 
 // 2. Run Server
-configureServer();
+runServer();
