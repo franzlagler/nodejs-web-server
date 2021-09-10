@@ -22,6 +22,7 @@ function runServer() {
       }
       // Creates ContentType depending on file type
       const fileType = path.extname(fileName);
+      console.log(fileType);
       const contentType = getCorrectContentType(fileType);
 
       // Display entered web page
