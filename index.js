@@ -1,65 +1,64 @@
+// 0. Get all the required modules
 const http = require('node:http');
 const fs = require('node:fs');
 const path = require('node:path');
+const getCorrectContentType = require('./ContentType'); // Custom Module
 
-const port = process.env.PORT || 3000;
-
-function checkPath(filePath) {
-  if (filePath === './public/favicon.ico') {
-    filePath = './public/index.html';
-  } else if (filePath === './public/') {
-    filePath = './public/index.html';
-  }
-  const stats = fs.statSync(filePath);
-  const isFile = stats.isFile();
-  console.log(isFile);
-  if (!isFile) {
-    const fileList = fs.readdirSync(filePath);
-    console.log(fileList);
-    filePath += `/${fileList[0]}`;
-  }
-  return filePath;
-}
-
+// 1. Configure Server to Run on Port
 function configureServer() {
   const server = http.createServer((req, res) => {
+    // Prefix ensures that only files within the public folder are acccessible
     let fileName = './public' + req.url;
-    const fileType = path.extname(fileName);
 
-    fileName = checkPath(fileName);
-
-    fs.access(fileName, (error) => {
-      if (error) {
-        console.log(
-          '404 Not Found\nPlease check if you entered the correct path!',
-        );
-        fs.readFile('./error.html', (err, errorFile) => {
-          if (err) {
-            console.log(err);
-          } else {
-            res.writeHead(404, { 'Content-Type': 'text/html' });
-            res.write(errorFile);
-            res.end();
-          }
-        });
-      } else {
-        console.log(fileName);
-        fs.readFile(fileName, (err, file) => {
-          if (err) {
-            console.log(err);
-          } else {
-            res.write(file);
-            res.end();
-          }
-        });
+    // If Path exists
+    if (fs.existsSync(fileName)) {
+      const stats = fs.statSync(fileName);
+      const isFile = stats.isFile();
+      // If directory get all files
+      if (!isFile) {
+        const fileList = fs.readdirSync(fileName);
+        // Take first file of directory and add to path
+        fileName += `/${fileList[0]}`;
       }
-    });
+      // Creates ContentType depending on file type
+      const fileType = path.extname(fileName);
+      const contentType = getCorrectContentType(fileType);
+
+      // Display entered web page
+      fs.readFile(fileName, (err, file) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.writeHead(200, contentType);
+          res.write(file);
+          res.end();
+        }
+      });
+
+      // If path does not exists
+    } else {
+      console.log(
+        '404 Not Found\nPlease check if you entered the correct path!',
+      );
+      // Display Error Page
+      fs.readFile('./error.html', (err, errorFile) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.writeHead(404, { 'Content-Type': 'text/html' });
+          res.write(errorFile);
+          res.end();
+        }
+      });
+    }
   });
+
+  // Listen to specified port
+  const port = process.env.PORT || 3000;
   server.listen(port, () => {
     console.log(`Server running at port ${port}`);
   });
 }
 
+// 2. Run Server
 configureServer();
-
-// Header Content Type
