@@ -6,7 +6,6 @@
   "author": "Franz Lagler <franz.lagler@outlook.com>",
   "license": "MIT",
   "devDependencies": {
-    "@babel/eslint-parser": "^7.15.4",
     "@next/eslint-plugin-next": "^11.0.0",
     "@types/node": "^16.0.0",
     "@types/react": "^17.0.6",
@@ -31,8 +30,5 @@
   "resolutions": {
     "eslint-plugin-react": "7.24.0",
     "eslint-plugin-testing-library": "4.6.0"
-  },
-  "dependencies": {
-    "@upleveled/eslint-plugin-upleveled": "^1.0.0"
   }
 }
