@@ -10,6 +10,10 @@ function runServer() {
     // Prefix ensures that only files within the public folder are acccessible
     let fileName = './public' + req.url;
 
+    if (fileName === './public/favicon.ico' || fileName === './public/') {
+      fileName = './public/index.html';
+    }
+
     // If Path exists
     if (fs.existsSync(fileName)) {
       const stats = fs.statSync(fileName);
@@ -22,7 +26,6 @@ function runServer() {
       }
       // Creates ContentType depending on file type
       const fileType = path.extname(fileName);
-      console.log(fileType);
       const contentType = getCorrectContentType(fileType);
 
       // Display entered web page
