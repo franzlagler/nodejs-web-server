@@ -13,6 +13,7 @@
     "@typescript-eslint/eslint-plugin": "^4.21.0",
     "@typescript-eslint/parser": "^4.21.0",
     "@upleveled/eslint-config-upleveled": "1.15.6",
+    "babel-eslint": "^10.1.0",
     "eslint": "^7.23.0",
     "eslint-config-react-app": "^6.0.0",
     "eslint-import-resolver-typescript": "^2.4.0",
@@ -30,5 +31,8 @@
   "resolutions": {
     "eslint-plugin-react": "7.24.0",
     "eslint-plugin-testing-library": "4.6.0"
+  },
+  "dependencies": {
+    "@upleveled/eslint-plugin-upleveled": "^1.0.0"
   }
 }
